@@ -1,0 +1,160 @@
+// USER VARIABLES SECTION
+
+// Customization COLOR
+$accent: #820101; // Accent Color
+$accent-text: #000;
+$text-color-gray: #a5a5a5;
+$text-color: #111820; // Text Color
+$color-btn: #959595;
+$ngwhite: #FBFBFD;
+
+
+// Customization Fonts-family
+$system: -apple-system, BlinkMacSystemFont, Arial, sans-serif; // System Font Family
+$roboto: 'Roboto-example', sans-serif; // Roboto Font Family
+$mont: 'Mont-example', sans-serif;
+$ornament-font: 'Bierahinia-example';
+
+
+// Customization Fonts-size
+$fz--base: 16px;
+$fz--small: ceil($fz--base * 0.75); /* 12px */
+$fz--xsmall: ceil($fz--base * 0.88); /* 14px */
+$fz--xbase: ceil($fz--base * 1.13); /* 18px */
+$fz--medium: ceil($fz--base * 1.25); /* 20px */
+$fz--xmedium: ceil($fz--base * 1.5); /* 24px */
+$fz--xl: ceil($fz--base * 1.88); /* 30px */
+$fz--xxl: ceil($fz--base * 2.25); /* 36px */
+
+// Customization Fonts-weight
+$hairline: 200;
+$light: 300;
+$normal: 400;
+$bold: 700;
+$extrabold: 900;
+
+// Bootstrap compatible gutter variable => $gutter
+$grid-gutter-width: 30px;
+$grid-columns: 12;
+$grid-breakpoints: (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px);
+$container-max-widths: (sm: 540px, md: 720px, lg: 960px, xl: 1140px);
+$gutter: $grid-gutter-width;
+
+
+
+// IMPORT SECTION
+
+@import 'node_modules/bootstrap/scss/bootstrap-reboot.scss'; // Bootstrap Reboot collection
+@import 'node_modules/bootstrap/scss/mixins/_breakpoints.scss'; // Bootstrap Breakpoints mixin
+// @import 'node_modules/bootstrap/scss/bootstrap-grid.scss'; // Optional Bootstrap Grid
+// @import 'node_modules/bootstrap/scss/utilities/_sizing.scss'; // Optional Bootstrap Utilites
+@import "../libs/bootstrap/scss/bootstrap-reboot.scss";
+@import "../libs/bootstrap/scss/bootstrap-grid.scss";
+@import "../libs/bootstrap/scss/utilities/_sizing.scss";
+@import "../libs/font-awesome/css/fontawesome-all.min.css";
+@import "../libs/aos/aos.css";
+//@import "../libs/animate/animate.min.css";
+@import "../libs/fotorama/fotorama.css";
+
+// FONTS LOAD SECTION
+
+@mixin font($fname, $fstyle, $fweight, $furl) {
+	@font-face {
+		font-family: $fname;
+		font-style: $fstyle;
+		font-weight: $fweight;
+		// font-display: swap; // Uncomment to initially display system fonts
+		src: local($fname), url($furl) format('woff2');
+	}
+}
+
+@include font('Roboto-example', normal, 400, '../fonts/roboto-regular-webfont.woff2');
+@include font('Roboto-example', italic, 400, '../fonts/roboto-italic-webfont.woff2');
+@include font('Roboto-example', normal, 700, '../fonts/roboto-bold-webfont.woff2');
+@include font('Roboto-example', italic, 700, '../fonts/roboto-bolditalic-webfont.woff2');
+@include font('Roboto-example', normal, 300, '../fonts/roboto-light-webfont.woff2');
+@include font('Roboto-example', italic, 300, '../fonts/roboto-lightitalic-webfont.woff2');
+@include font('Mont-example', normal, 300, '../fonts/Mont-Light.woff2');
+@include font('Mont-example', normal, 400, '../fonts/Mont-Regular.woff2');
+@include font('Mont-example', normal, 700, '../fonts/Mont-Bold.woff2');
+@include font('Mont-example', normal, 900, '../fonts/Mont-Black.woff2');
+@include font("Bierahinia-example", normal, 400, "../fonts/Bierahinia.ttf" );
+@include font("FA", normal, 400, "../libs/font-awesome/webfonts/fa-brands-400.woff2");
+@include font("FA", normal, 400, "../libs/font-awesome/webfonts/fa-solid-900.woff2");
+@include font("FA", normal, 400, "../libs/font-awesome/webfonts/fa-regular-400.woff2");
+
+// GENERAL DOCUMENT STYLES
+
+//MIXIN
+// Nav menu START
+@mixin centerer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+
+$z-indexes: ( 
+"model-menu",
+"hamburger-open",
+);
+
+@function z($name) {
+    @if index($z-indexes,
+    $name) {
+        @return (length($z-indexes) - index($z-indexes, $name))+1;
+    }
+    @else {
+        @warn 'There is no item "#{$name}" in this list; choose one of: #{$z-indexes}';
+        @return null;
+    }
+}
+// Nav menu START END
+
+::placeholder {
+	color: #666;
+}
+
+::selection {
+	background-color: $accent;
+	color: #fff;
+}
+
+input, textarea {
+	outline: none;
+	&:focus:required:invalid { border-color: red }
+	&:required:valid { border-color: green }
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+//ANIMATION 
+//fadeINUP START
+@keyframes fadeInUp {
+    from {
+        transform: translate3d(0,80px,0)
+    }
+    to {
+        transform: translate3d(0,0,0);
+        opacity: 10
+    }
+}
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+.animatedFadeInUp {
+    opacity: 0
+}
+.fadeInUp {
+    opacity: 0;
+    animation-name: fadeInUp;
+}
+// animated fadeINUP END
